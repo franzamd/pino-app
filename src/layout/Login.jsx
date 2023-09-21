@@ -6,7 +6,7 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
-import {Container, Box, FormControl, Button} from 'native-base';
+import {Box, Button} from 'native-base';
 import InputGroup from '../components/InputGroup';
 import TextErrorGlobal from '../components/TextErrorGlobal';
 import AuthContext from '../context/auth/authContext';
@@ -42,7 +42,7 @@ const Login = ({route, navigation}) => {
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
-      <Box padding={10}>
+      <Box padding={5}>
         <Text style={styles.logo}>Centro Odontológico Pino</Text>
         <InputGroup
           error={error && error.email}

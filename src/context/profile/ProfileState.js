@@ -1,5 +1,6 @@
-import React, {useReducer} from 'react';
+import React, { useReducer } from 'react';
 import axios from 'axios';
+import { API_URL } from '@env';
 
 import ProfileContext from './profileContext';
 import profileReducer from './profileReducer';
@@ -29,7 +30,7 @@ const ProfileState = (props) => {
   const getProfileMe = async () => {
     try {
       setLoading(true);
-      const res = await axios.get('http://10.0.2.2:5000/api/profiles/me');
+      const res = await axios.get(`${API_URL}/api/profiles/me`);
 
       dispatch({
         type: GET_PROFILE,
@@ -38,7 +39,7 @@ const ProfileState = (props) => {
     } catch (error) {
       dispatch({
         type: PROFILE_ERROR,
-        payload: error.response.data.error,
+        payload: error.response?.data?.error,
       });
     }
   };
@@ -54,14 +55,14 @@ const ProfileState = (props) => {
     try {
       setLoading(true);
       const res = await axios.post(
-        'http://10.0.2.2:5000/api/profiles/me',
+        `${API_URL}/api/profiles/me`,
         formData,
         config,
       );
 
       dispatch({
         type: CREATE_PROFILE,
-        paylod: res.data,
+        payload: res.data,
       });
 
       await getProfileMe();
@@ -69,7 +70,7 @@ const ProfileState = (props) => {
     } catch (error) {
       dispatch({
         type: PROFILE_ERROR,
-        payload: error.response.data.error,
+        payload: error.response?.data?.error,
       });
     }
   };
@@ -85,7 +86,7 @@ const ProfileState = (props) => {
     try {
       setLoading(true);
       const res = await axios.put(
-        'http://10.0.2.2:5000/api/profiles/me',
+        `${API_URL}/api/profiles/me`,
         formData,
         config,
       );
@@ -101,7 +102,7 @@ const ProfileState = (props) => {
     } catch (error) {
       dispatch({
         type: PROFILE_ERROR,
-        payload: error.response.data.error,
+        payload: error.response?.data?.error,
       });
     }
   };

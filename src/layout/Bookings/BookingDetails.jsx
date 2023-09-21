@@ -58,38 +58,68 @@ const BookingDetails = ({navigation, route}) => {
     getBookings();
   };
 
+  // Render
+  function renderHeader() {
+    return (
+      <View
+        style={{
+          flexDirection: 'row',
+          paddingHorizontal: 24,
+          marginTop: 24,
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        }}>
+        <View
+          style={{
+            flexDirection: 'row',
+          }}>
+          <FontAwesome5
+            name={'chevron-left'}
+            color="#fb5b5a"
+            size={30}
+            onPress={() => navigation.goBack()}
+          />
+        </View>
+        <View
+          style={{
+            flex: 1,
+            marginLeft: 20,
+          }}>
+          <Text style={styles.titleMenu}>Detalles de la Consulta</Text>
+        </View>
+      </View>
+    );
+  }
+
   return (
     <View style={styles.container}>
-      <View style={styles.containerBox}>
-        <Text style={styles.titleMenu}>Detalles de la Consulta</Text>
-      </View>
+      {/* Header */}
+      {renderHeader()}
 
       {/* Card Information about Booking info*/}
-      <Card>
-        <Box>
-          <Box>
+      <Box padding={5}>
+        <Card>
+          <Box
+            style={{
+              flexDirection: 'row',
+              display: 'flex',
+            }}>
+            <FontAwesome5 name={'calendar'} color="#5067FF" size={20} />{' '}
+            <Text style={styles.textDate}>Fecha de cita: </Text>
             <Text>
-              <FontAwesome5 name={'calendar'} color="#5067FF" size={20} />{' '}
+              {booking?.date
+                ? moment(booking.date.slice(0, 10)).format('DD MMMM YYYY')
+                : ''}
             </Text>
-            <Box>
-              <Text style={styles.textDate}>Fecha de cita</Text>
-              <Text>
-                {booking?.date
-                  ? moment(booking.date.slice(0, 10)).format('DD MMMM YYYY')
-                  : ''}
-              </Text>
-              <Text note>
-                Horario de la consulta: {booking?.consultation?.hourDate}
-              </Text>
-              <Text note>
-                Reservado:{' '}
-                {booking?.consultation
-                  ? booking(booking.consultation.date).format(
-                      'DD MMM YYYY, LTS a',
-                    )
-                  : ''}
-              </Text>
-            </Box>
+          </Box>
+          <Text>Horario de la consulta: {booking?.consultation?.hourDate}</Text>
+          <Text>
+            Reservado:{' '}
+            {booking?.consultation?.date
+              ? booking(booking.consultation.date).format('DD MMM YYYY, LTS a')
+              : ''}
+          </Text>
+          <Box style={{marginBottom: 10}}>
             {booking?.consultation?.state ? (
               <Text style={styles.textActive}>
                 <FontAwesome5 name={'check-circle'} size={20} /> Completado
@@ -100,18 +130,16 @@ const BookingDetails = ({navigation, route}) => {
               </Text>
             )}
           </Box>
-        </Box>
-        {!booking?.consultation?.state && (
-          <View style={styles.buttonsBox}>
+          {!booking?.consultation?.state && (
             <Button
               style={styles.submitBtn}
               onPress={onUnselected}
               disabled={loading}>
               <Text style={styles.textBtnSubmit}>Eliminar Reserva</Text>
             </Button>
-          </View>
-        )}
-      </Card>
+          )}
+        </Card>
+      </Box>
     </View>
   );
 };
@@ -129,7 +157,7 @@ const styles = StyleSheet.create({
   },
   submitBtn: {
     alignSelf: 'center',
-    width: '30%',
+    width: '100%',
     backgroundColor: '#fb5b5a',
     justifyContent: 'center',
   },
@@ -146,9 +174,6 @@ const styles = StyleSheet.create({
   },
   containerBox: {
     padding: 10,
-  },
-  buttonsBox: {
-    marginVertical: 20,
   },
   textBtnSubmit: {
     color: 'white',

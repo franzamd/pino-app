@@ -1,6 +1,8 @@
 import React, { useReducer } from 'react';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
+import { API_URL } from '@env';
+
 import authReducer from './authReducer';
 import AuthContext from './authContext';
 
@@ -37,7 +39,7 @@ const AuthState = (props) => {
     };
     try {
       const res = await axios.post(
-        'http://10.0.2.2:5000/api/auth/login',
+        `${API_URL}/api/auth/login`,
         formData,
         config,
       );
@@ -51,7 +53,7 @@ const AuthState = (props) => {
     } catch (error) {
       dispatch({
         type: LOGIN_FAIL,
-        payload: error.response.data.error,
+        payload: error.response?.data?.error,
       });
     }
   };
@@ -66,7 +68,7 @@ const AuthState = (props) => {
 
     try {
       const res = await axios.post(
-        'http://10.0.2.2:5000/api/auth/register',
+        `${API_URL}/api/auth/register`,
         formData,
         config,
       );
@@ -80,7 +82,7 @@ const AuthState = (props) => {
     } catch (error) {
       dispatch({
         type: REGISTER_FAIL,
-        payload: error.response.data.error,
+        payload: error.response?.data?.error,
       });
     }
   };
@@ -88,7 +90,7 @@ const AuthState = (props) => {
   // Load user
   const loadUser = async () => {
     try {
-      const res = await axios.get('http://10.0.2.2:5000/api/auth/me');
+      const res = await axios.get(`${API_URL}/api/auth/me`);
 
       dispatch({
         type: USER_LOADED,
@@ -102,7 +104,7 @@ const AuthState = (props) => {
   // Logout
   const logout = async () => {
     try {
-      await axios.get('http://10.0.2.2:5000/api/auth/logout');
+      await axios.get(`${API_URL}/api/auth/logout`);
 
       dispatch({
         type: LOGOUT,
@@ -110,7 +112,7 @@ const AuthState = (props) => {
     } catch (error) {
       dispatch({
         type: LOGOUT,
-        payload: error.response.data.error,
+        payload: error.response?.data?.error,
       });
     }
   };

@@ -48,7 +48,7 @@ const Register = ({route, navigation}) => {
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
-      <Box padding={10}>
+      <Box padding={5}>
         <Text style={styles.logo}>Centro Odontológico Pino</Text>
         <InputGroup
           error={error && error.username}

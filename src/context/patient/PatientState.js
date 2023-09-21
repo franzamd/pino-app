@@ -1,5 +1,6 @@
-import React, {useReducer} from 'react';
+import React, { useReducer } from 'react';
 import axios from 'axios';
+import { API_URL } from '@env';
 
 import patientReducer from './patientReducer';
 import PatientContext from './patientContext';
@@ -26,7 +27,7 @@ const PatientState = (props) => {
     try {
       setLoading(true);
 
-      const res = await axios.get(`http://10.0.2.2:5000/api/patients/me/${id}`);
+      const res = await axios.get(`${API_URL}/api/patients/me/${id}`);
 
       dispatch({
         type: GET_PATIENT,
@@ -35,7 +36,7 @@ const PatientState = (props) => {
     } catch (err) {
       dispatch({
         type: PATIENT_ERROR,
-        payload: err.response.data.error,
+        payload: err.response?.data?.error,
       });
     }
   };
@@ -50,14 +51,14 @@ const PatientState = (props) => {
 
     try {
       let res = await axios.post(
-        'http://10.0.2.2:5000/api/patients/',
+        `${API_URL}/api/patients/`,
         formData,
         config,
       );
     } catch (err) {
       dispatch({
         type: PATIENT_ERROR,
-        payload: err.response.data.error,
+        payload: err.response?.data?.error,
       });
     }
   };
@@ -72,14 +73,14 @@ const PatientState = (props) => {
 
     try {
       let res = await axios.put(
-        `http://10.0.2.2:5000/api/patients/${id}`,
+        `${API_URL}/api/patients/${id}`,
         formData,
         config,
       );
     } catch (err) {
       dispatch({
         type: PATIENT_ERROR,
-        payload: err.response.data.error,
+        payload: err.response?.data?.error,
       });
     }
   };

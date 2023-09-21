@@ -1,7 +1,8 @@
-import React, {useReducer} from 'react';
+import React, { useReducer } from 'react';
 import axios from 'axios';
 import BookingContext from './bookingContext';
 import bookingReducer from './bookingReducer';
+import { API_URL } from '@env';
 
 import {
   GET_BOOKINGS,
@@ -25,7 +26,7 @@ const BookingState = (props) => {
     try {
       setLoading();
 
-      const res = await axios.get(`http://10.0.2.2:5000/api/bookings`);
+      const res = await axios.get(`${API_URL}/api/bookings`);
 
       dispatch({
         type: GET_BOOKINGS,
@@ -34,7 +35,7 @@ const BookingState = (props) => {
     } catch (err) {
       dispatch({
         type: BOOKING_ERROR,
-        payload: err.response.data.error,
+        payload: err.response?.data?.error,
       });
     }
   };
@@ -43,7 +44,7 @@ const BookingState = (props) => {
     try {
       setLoading();
 
-      const res = await axios.get(`http://10.0.2.2:5000/api/bookings/${id}`);
+      const res = await axios.get(`${API_URL}/api/bookings/${id}`);
 
       dispatch({
         type: GET_BOOKING,
@@ -52,7 +53,7 @@ const BookingState = (props) => {
     } catch (err) {
       dispatch({
         type: BOOKING_ERROR,
-        payload: err.response.data.error,
+        payload: err.response?.data?.error,
       });
     }
   };
@@ -67,7 +68,7 @@ const BookingState = (props) => {
 
     try {
       await axios.post(
-        `http://10.0.2.2:5000/api/bookings/${idBooking}/consultations`,
+        `${API_URL}/api/bookings/${idBooking}/consultations`,
         formData,
         config,
       );
@@ -80,7 +81,7 @@ const BookingState = (props) => {
     } catch (err) {
       dispatch({
         type: BOOKING_ERROR,
-        payload: err.response.data.error,
+        payload: err.response?.data?.error,
       });
     }
   };
@@ -89,7 +90,7 @@ const BookingState = (props) => {
   const deleteConsultation = async (id, idConsultation, navigation) => {
     try {
       await axios.delete(
-        `http://10.0.2.2:5000/api/bookings/${id}/consultations/${idConsultation}`,
+        `${API_URL}/api/bookings/${id}/consultations/${idConsultation}`,
       );
 
       navigation.goBack();
@@ -97,7 +98,7 @@ const BookingState = (props) => {
     } catch (err) {
       dispatch({
         type: BOOKING_ERROR,
-        payload: err.response.data.error,
+        payload: err.response?.data?.error,
       });
     }
   };

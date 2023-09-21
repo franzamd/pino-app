@@ -9,7 +9,7 @@ import {
   Alert,
   ActivityIndicator,
 } from 'react-native';
-import {Box, CardItem} from 'native-base';
+import {Box, Card} from 'native-base';
 import AuthContext from '../../context/auth/authContext';
 import BookingContext from '../../context/bookigs/bookingContext';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome';
@@ -88,6 +88,38 @@ const AddBooking = ({navigation, route}) => {
     }
   };
 
+  function renderHeader() {
+    return (
+      <View
+        style={{
+          flexDirection: 'row',
+          paddingHorizontal: 24,
+          marginTop: 24,
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        }}>
+        <View
+          style={{
+            flexDirection: 'row',
+          }}>
+          <FontAwesome5
+            name={'chevron-left'}
+            color="#fb5b5a"
+            size={30}
+            onPress={() => navigation.goBack()}
+          />
+        </View>
+        <View
+          style={{
+            flex: 1,
+            marginLeft: 20,
+          }}>
+          <Text style={styles.titleMenu}>Detalles</Text>
+        </View>
+      </View>
+    );
+  }
+
   if (loading) {
     return (
       <View style={styles.centerView}>
@@ -99,52 +131,59 @@ const AddBooking = ({navigation, route}) => {
   const renderItem = ({item}) => {
     return (
       <TouchableOpacity onPress={e => onSubmit(e, item)}>
-        <Box>
-          <CardItem>
+        <Card>
+          <Box
+            style={{
+              flexDirection: 'row',
+              display: 'flex',
+              marginBottom: 10,
+            }}>
+            <FontAwesome5 name={'calendar'} color="#5067FF" size={20} />{' '}
             <Box>
-              <Text>
-                <FontAwesome5 name={'calendar'} color="#5067FF" size={20} />{' '}
-              </Text>
-              <Box>
-                <Text note>Horario de la consulta: {item.hourDate}</Text>
-              </Box>
-              {item.reserved ? (
-                <Text style={styles.textReserved}>
-                  <FontAwesome5 name={'times-circle'} size={20} /> Reservado
-                </Text>
-              ) : (
-                <Text style={styles.textAvailable}>
-                  <FontAwesome5 name={'check'} size={20} /> Disponible
-                </Text>
-              )}
+              <Text>Horario de la consulta: {item.hourDate}</Text>
             </Box>
-          </CardItem>
-        </Box>
+          </Box>
+          {item.reserved ? (
+            <Text style={styles.textReserved}>
+              <FontAwesome5 name={'times-circle'} size={20} /> Reservado
+            </Text>
+          ) : (
+            <Text style={styles.textAvailable}>
+              <FontAwesome5 name={'check'} size={20} /> Disponible
+            </Text>
+          )}
+        </Card>
       </TouchableOpacity>
     );
   };
 
   return (
     <View style={styles.container}>
-      <View style={styles.containerBox}>
-        <Text style={styles.titleMenu}>Fecha {date}</Text>
-        <Text style={styles.titleMenu}>Horarios de Consultas</Text>
-      </View>
+      {/* Header */}
+      {renderHeader()}
 
-      {booking?.consultations?.length === 0 ? (
-        <View style={styles.centerView}>
-          {/* <Text style={styles.textItemsNotFound}>
+      <Box padding={5}>
+        <View style={styles.containerBox}>
+          <Text style={styles.subtitleMenu}>Fecha {date}</Text>
+          <Text>Horarios de Consultas</Text>
+        </View>
+
+        {booking?.consultations?.length === 0 ? (
+          <View style={styles.centerView}>
+            {/* <Text style={styles.textItemsNotFound}>
             <FontAwesome5 name={'times-circle'} size={20} /> Lo sentimos, no
             encontramos ninguna consulta por reservar
           </Text> */}
-        </View>
-      ) : (
-        <FlatList
-          data={booking?.consultations}
-          renderItem={renderItem}
-          keyExtractor={item => item._id}
-        />
-      )}
+          </View>
+        ) : (
+          <FlatList
+            style={{marginTop: 20}}
+            data={booking?.consultations}
+            renderItem={renderItem}
+            keyExtractor={item => item._id}
+          />
+        )}
+      </Box>
     </View>
   );
 };
@@ -159,9 +198,7 @@ const styles = StyleSheet.create({
   textAvailable: {
     color: '#11cdef',
   },
-  containerBox: {
-    padding: 10,
-  },
+  containerBox: {},
   textItemsNotFound: {
     textAlign: 'center',
   },
@@ -172,8 +209,12 @@ const styles = StyleSheet.create({
   },
   titleMenu: {
     textAlign: 'left',
-    fontSize: 20,
+    fontSize: 24,
     color: '#fb5b5a',
+    fontWeight: 'bold',
+  },
+  subtitleMenu: {
+    fontSize: 16,
     fontWeight: 'bold',
   },
 });

@@ -1,8 +1,11 @@
 import React, {useState, useContext, useEffect} from 'react';
-import {View, StyleSheet, Text, TouchableOpacity} from 'react-native';
-import {Button, Container, Center, FormControl, Box, Image} from 'native-base';
+import {View, StyleSheet, Text, ScrollView} from 'react-native';
+import {Button, Box, Image} from 'native-base';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome';
+
 import InputGroup from '../components/InputGroup';
 import ProfileContext from '../context/profile/profileContext';
+import TextErrorGlobal from '../components/TextErrorGlobal';
 
 const Profile = ({navigation}) => {
   const profileContext = useContext(ProfileContext);
@@ -76,22 +79,49 @@ const Profile = ({navigation}) => {
 
   const imgSrc = require('../assets/nouser.png');
 
-  return (
-    <Container>
-      <Text style={styles.logo}>Mi Perfil</Text>
-      {/* Image section */}
-      <View style={styles.imageSection}>
-        {/* <TouchableOpacity onPress={handleInputImage}> */}
-        <Image source={imgSrc} style={styles.imgSize} />
-        {/* </TouchableOpacity> */}
-        <Box style={styles.textImgPreview}>
-          <Text>{profile.name}</Text>
-          <Text note>{profile.lastname}</Text>
-        </Box>
+  function renderHeader() {
+    return (
+      <View
+        style={{
+          flexDirection: 'row',
+          paddingHorizontal: 24,
+          marginTop: 24,
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        }}>
+        <View
+          style={{
+            flexDirection: 'row',
+          }}>
+          <FontAwesome5
+            name={'chevron-left'}
+            color="#fb5b5a"
+            size={30}
+            onPress={() => navigation.goBack()}
+          />
+        </View>
+        <View
+          style={{
+            flex: 1,
+            marginLeft: 20,
+          }}>
+          <Text style={styles.titleMenu}>Mi Perfil</Text>
+        </View>
       </View>
-      {/* Information section */}
-      <Center>
-        <FormControl>
+    );
+  }
+
+  return (
+    <View style={{flex: 1}}>
+      {/* Header */}
+      {renderHeader()}
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <Box padding={5}>
+          {/* Image section */}
+          <View style={styles.imageSection}>
+            <Image source={imgSrc} style={styles.imgSize} alt="image" />
+          </View>
+          {/* Information section */}
           <InputGroup
             error={error && error.name}
             label="Nombres"
@@ -116,6 +146,8 @@ const Profile = ({navigation}) => {
             value={profile.phone}
             handleInput={value => handleInput(value, 'phone')}
           />
+          <TextErrorGlobal error={error} />
+
           <View style={styles.buttonsBox}>
             <Button
               style={styles.submitBtn}
@@ -124,22 +156,21 @@ const Profile = ({navigation}) => {
               <Text style={styles.textBtnSubmit}>ACEPTAR</Text>
             </Button>
           </View>
-        </FormControl>
-      </Center>
-    </Container>
+        </Box>
+      </ScrollView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  logo: {
-    fontWeight: 'bold',
-    fontSize: 36,
-    textAlign: 'center',
+  titleMenu: {
+    textAlign: 'left',
+    fontSize: 24,
     color: '#fb5b5a',
-    marginBottom: 20,
+    fontWeight: 'bold',
   },
   imageSection: {
-    height: 180,
+    height: 150,
     alignItems: 'center',
     padding: 10,
   },
@@ -160,7 +191,7 @@ const styles = StyleSheet.create({
     color: '#fb5b5a',
   },
   buttonsBox: {
-    marginVertical: 40,
+    marginVertical: 30,
   },
   informationSection: {
     backgroundColor: 'orange',

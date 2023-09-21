@@ -34,81 +34,68 @@ const Index = ({route, navigation, ...rest}, props) => {
     // eslint-disable-next-line
   }, [loading]);
 
-  // if (loading) {
+  if (loading) {
+    return (
+      <View style={styles.spinner}>
+        <ActivityIndicator size="large" color="black"></ActivityIndicator>
+      </View>
+    );
+  }
   return (
-    // <View style={styles.spinner}>
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{headerShown: false}}>
-        <Stack.Screen
-          name="Login"
-          component={Login}
-          options={{
-            animationTypeForReplace: !isAuthenticated ? 'pop' : 'push',
-          }}
-        />
-        <Stack.Screen name="Register" component={Register} />
-      </Stack.Navigator>
+      {isAuthenticated && user && (
+        <>
+          <Stack.Navigator
+            initialRouteName="Home"
+            screenOptions={{headerShown: false}}>
+            {/* User signed in */}
+            <>
+              <Stack.Screen name="Home" component={Home} />
+              <Stack.Screen
+                name="Profile"
+                component={Profile}
+                options={{title: 'Perfil'}}
+              />
+              <Stack.Screen
+                name="Bookings"
+                component={Bookings}
+                options={{title: 'Reservas'}}
+              />
+              <Stack.Screen
+                name="AddBooking"
+                component={AddBooking}
+                options={{title: 'Añadir Reserva'}}
+              />
+              <Stack.Screen
+                name="AddConsultation"
+                component={AddConsultation}
+                options={{title: 'Añadir Consulta'}}
+              />
+              <Stack.Screen
+                name="BookingDetails"
+                component={BookingDetails}
+                options={{title: 'Detalles de la Consulta'}}
+              />
+            </>
+          </Stack.Navigator>
+        </>
+      )}
+
+      {/* User is not signed in */}
+      {!isAuthenticated && !user && !loading && (
+        <Stack.Navigator screenOptions={{headerShown: false}}>
+          <Stack.Screen
+            name="Login"
+            component={Login}
+            options={{
+              animationTypeForReplace: !isAuthenticated ? 'pop' : 'push',
+            }}
+          />
+          <Stack.Screen name="Register" component={Register} />
+        </Stack.Navigator>
+      )}
     </NavigationContainer>
-    // </View>
   );
-  // }
-
-  // return (
-  //   <NavigationContainer>
-  //     {isAuthenticated && user && (
-  //       <>
-  //         <Drawer.Navigator
-  //           drawerContent={(props) => <DrawerContent {...props} />}
-  //           initialRouteName="Home"
-  //           screenOptions={{headerShown: false}}>
-  //           {/* User signed in */}
-  //           <>
-  //             <Drawer.Screen name="Home" component={Home} />
-  //             <Drawer.Screen
-  //               name="Profile"
-  //               component={Profile}
-  //               options={{title: 'Perfil'}}
-  //             />
-  //             <Drawer.Screen
-  //               name="Bookings"
-  //               component={Bookings}
-  //               options={{title: 'Reservas'}}
-  //             />
-  //             <Drawer.Screen
-  //               name="AddBooking"
-  //               component={AddBooking}
-  //               options={{title: 'Añadir Reserva'}}
-  //             />
-  //             <Drawer.Screen
-  //               name="AddConsultation"
-  //               component={AddConsultation}
-  //               options={{title: 'Añadir Consulta'}}
-  //             />
-  //             <Drawer.Screen
-  //               name="BookingDetails"
-  //               component={BookingDetails}
-  //               options={{title: 'Detalles de la Consulta'}}
-  //             />
-  //           </>
-  //         </Drawer.Navigator>
-  //       </>
-  //     )}
-
-  //     {/* User is not signed in */}
-  //     {!isAuthenticated && !user && !loading && (
-  //       <Stack.Navigator screenOptions={{headerShown: false}}>
-  //         <Stack.Screen
-  //           name="Login"
-  //           component={Login}
-  //           options={{
-  //             animationTypeForReplace: !isAuthenticated ? 'pop' : 'push',
-  //           }}
-  //         />
-  //         <Stack.Screen name="Register" component={Register} />
-  //       </Stack.Navigator>
-  //     )}
-  //   </NavigationContainer>
-  // );
 };
 
 const styles = StyleSheet.create({
