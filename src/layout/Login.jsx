@@ -7,7 +7,6 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {Container, Box, FormControl, Button} from 'native-base';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scrollview';
 import InputGroup from '../components/InputGroup';
 import TextErrorGlobal from '../components/TextErrorGlobal';
 import AuthContext from '../context/auth/authContext';
@@ -43,49 +42,37 @@ const Login = ({route, navigation}) => {
 
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
-      {/* <KeyboardAwareScrollView
-        keyboardDismissMode="on-drag"
-        contentContainerStyle={{
-          flex: 1,
-          paddingHorizontal: 10,
-        }}> */}
       <Box padding={10}>
         <Text style={styles.logo}>Centro Odontológico Pino</Text>
-        <Box>
-          <InputGroup
-            error={error && error.email}
-            label="Email"
-            value={auth.email}
-            handleInput={value => handleInput(value, 'email')}
-          />
-          <InputGroup
-            error={error && error.password}
-            label="Password"
-            value={auth.password}
-            secureTextEntry={true}
-            handleInput={value => handleInput(value, 'password')}
-          />
-          <TextErrorGlobal error={error} />
-          <View style={styles.sectionButtons}>
-            <Button
-              style={styles.loginBtn}
-              onPress={onSubmit}
-              disabled={loading}>
-              <Text style={styles.loginBtnText}>
-                {loading ? 'Cargando...' : 'LOGIN'}
-              </Text>
-            </Button>
-            <TouchableOpacity
-              disabled={loading}
-              onPress={() => {
-                navigation.navigate('Register');
-              }}>
-              <Text style={styles.registerText}>Registrarse</Text>
-            </TouchableOpacity>
-          </View>
-        </Box>
+        <InputGroup
+          error={error && error.email}
+          label="Email"
+          value={auth.email}
+          handleInput={value => handleInput(value, 'email')}
+        />
+        <InputGroup
+          error={error && error.password}
+          label="Password"
+          value={auth.password}
+          secureTextEntry={true}
+          handleInput={value => handleInput(value, 'password')}
+        />
+        <TextErrorGlobal error={error} />
+        <View style={styles.sectionButtons}>
+          <Button style={styles.loginBtn} onPress={onSubmit} disabled={loading}>
+            <Text style={styles.loginBtnText}>
+              {loading ? 'Cargando...' : 'LOGIN'}
+            </Text>
+          </Button>
+          <TouchableOpacity
+            disabled={loading}
+            onPress={() => {
+              navigation.navigate('Register');
+            }}>
+            <Text style={styles.registerText}>Registrarse</Text>
+          </TouchableOpacity>
+        </View>
       </Box>
-      {/* </KeyboardAwareScrollView> */}
     </ScrollView>
   );
 };

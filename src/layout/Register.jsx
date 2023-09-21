@@ -50,49 +50,47 @@ const Register = ({route, navigation}) => {
     <ScrollView showsVerticalScrollIndicator={false}>
       <Box padding={10}>
         <Text style={styles.logo}>Centro Odontológico Pino</Text>
-        <Box>
-          <InputGroup
-            error={error && error.username}
-            label="Username"
-            value={auth.username}
-            handleInput={value => handleInput(value, 'username')}
-          />
-          <InputGroup
-            error={error && error.email}
-            label="Email"
-            value={auth.email}
-            handleInput={value => handleInput(value, 'email')}
-          />
-          <InputGroup
-            secureTextEntry={true}
-            error={error && error.password}
-            label="Password"
-            value={auth.password}
-            handleInput={value => handleInput(value, 'password')}
-          />
-          <InputGroup
-            secureTextEntry={true}
-            value={auth.password2}
-            label="Repetir Password"
-            handleInput={value => handleInput(value, 'password2')}
-          />
-          <TextErrorGlobal error={error} />
-          <View style={styles.sectionButtons}>
-            <Button
-              style={styles.registerBtn}
-              onPress={onSubmit}
-              disabled={loading}>
-              <Text style={styles.registerBtnText}>
-                {loading ? 'Cargando...' : 'REGISTRARSE'}
-              </Text>
-            </Button>
-            <TouchableOpacity
-              disabled={loading}
-              onPress={() => navigation.navigate('Login')}>
-              <Text style={styles.logintText}>Login</Text>
-            </TouchableOpacity>
-          </View>
-        </Box>
+        <InputGroup
+          error={error && error.username}
+          label="Username"
+          value={auth.username}
+          handleInput={value => handleInput(value, 'username')}
+        />
+        <InputGroup
+          error={error && error.email}
+          label="Email"
+          value={auth.email}
+          handleInput={value => handleInput(value, 'email')}
+        />
+        <InputGroup
+          secureTextEntry={true}
+          error={error && error.password}
+          label="Password"
+          value={auth.password}
+          handleInput={value => handleInput(value, 'password')}
+        />
+        <InputGroup
+          secureTextEntry={true}
+          value={auth.password2}
+          label="Repetir Password"
+          handleInput={value => handleInput(value, 'password2')}
+        />
+        <TextErrorGlobal error={error} />
+        <View style={styles.sectionButtons}>
+          <Button
+            style={styles.registerBtn}
+            onPress={onSubmit}
+            disabled={loading}>
+            <Text style={styles.registerBtnText}>
+              {loading ? 'Cargando...' : 'REGISTRARSE'}
+            </Text>
+          </Button>
+          <TouchableOpacity
+            disabled={loading}
+            onPress={() => navigation.navigate('Login')}>
+            <Text style={styles.logintText}>Login</Text>
+          </TouchableOpacity>
+        </View>
       </Box>
     </ScrollView>
   );

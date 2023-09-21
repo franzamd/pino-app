@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {StyleSheet} from 'react-native';
-import {Input, FormControl, Icon, Text} from 'native-base';
+import {Input, FormControl, WarningOutlineIcon} from 'native-base';
 
 const InputGroup = ({
   label,
@@ -13,7 +13,7 @@ const InputGroup = ({
   rows,
 }) => {
   return (
-    <>
+    <FormControl isInvalid={Boolean(error)}>
       <FormControl.Label>{label}</FormControl.Label>
       <Input
         type={type}
@@ -23,9 +23,12 @@ const InputGroup = ({
         w="100%"
         numberOfLines={rows}
       />
-      <Icon name="close" tintColor="red"></Icon>
-      {error && <Text style={styles.errorText}>{error}</Text>}
-    </>
+      {error && (
+        <FormControl.ErrorMessage leftIcon={<WarningOutlineIcon size="xs" />}>
+          {error}
+        </FormControl.ErrorMessage>
+      )}
+    </FormControl>
   );
 };
 
