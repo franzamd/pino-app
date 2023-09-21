@@ -1,0 +1,31 @@
+// Auth
+export const AUTH_LOADING = 'AUTH_LOADING';
+export const LOGIN_FAIL = 'LOGIN_FAIL';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
+export const REGISTER_FAIL = 'REGISTER_FAIL';
+export const CLEAR_ERRORS = 'CLEAR_ERRORS';
+export const AUTH_ERROR = 'AUTH_ERROR';
+export const USER_LOADED = 'USER_LOADED';
+export const LOGOUT = 'LOGOUT';
+
+// Profile
+export const GET_PROFILE = 'GET_PROFILE';
+export const CREATE_PROFILE = 'CREATE_PROFILE';
+export const UPDATE_PROFILE = 'UPDATE_PROFILE';
+export const SET_LOADING_PROFILE = 'SET_LOADING_PROFILE';
+export const PROFILE_ERROR = 'PROFILE_ERROR';
+export const CLEAR_ERROR_PHOTO = 'CLEAR_ERROR_PHOTO';
+export const RESET_PROFILE = 'RESET_PROFILE';
+
+// Bookings
+export const GET_BOOKINGS = 'GET_BOOKINGS';
+export const GET_BOOKING = 'GET_BOOKING';
+export const BOOKING_ERROR = 'BOOKING_ERROR';
+export const SET_LOADING_BOOKINGS = 'SET_LOADING_BOOKINGS';
+
+// Patient
+export const GET_PATIENT = 'GET_PATIENT';
+export const SET_LOADING_PATIENT = 'SET_LOADING_PATIENT';
+export const PATIENT_ERROR = 'PATIENT_ERROR';
+export const RESET_PATIENTS = 'RESET_PATIENTS';
