@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   ActivityIndicator,
 } from 'react-native';
-import {Card, Box, Button} from 'native-base';
+import {Card, Box, Button, Pressable} from 'native-base';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome';
 import BookingContext from '../../context/bookigs/bookingContext';
 import moment from 'moment';
@@ -92,42 +92,47 @@ const AddConsultation = ({navigation}) => {
 
   const renderItem = ({item}) => {
     return (
-      <TouchableOpacity
+      <Pressable
         onPress={() =>
           navigation.navigate('AddConsultation', {
             booking: item,
           })
-        }>
-        <Card>
+        }
+        rounded="8"
+        overflow="hidden"
+        borderWidth="1"
+        borderColor="coolGray.300"
+        maxW="96"
+        shadow="3"
+        bg="coolGray.100"
+        p="5"
+        style={{marginBottom: 10}}>
+        <Box
+          style={{
+            flexDirection: 'row',
+            display: 'flex',
+            marginBottom: 10,
+          }}>
+          <FontAwesome5 name={'calendar'} color="#5067FF" size={20} />{' '}
           <Box
             style={{
               flexDirection: 'row',
               display: 'flex',
-              marginBottom: 10,
             }}>
-            <FontAwesome5 name={'calendar'} color="#5067FF" size={20} />{' '}
-            <Box
-              style={{
-                flexDirection: 'row',
-                display: 'flex',
-              }}>
-              <Text style={{fontWeight: 'bold'}}>Fecha: </Text>
-              <Text>
-                {moment(item.date.slice(0, 10)).format('DD MMMM YYYY')}
-              </Text>
-            </Box>
+            <Text style={{fontWeight: 'bold'}}>Fecha: </Text>
+            <Text>{moment(item.date.slice(0, 10)).format('DD MMMM YYYY')}</Text>
           </Box>
-          {item.state ? (
-            <Text style={styles.textActive}>
-              <FontAwesome5 name={'check-circle'} size={20} /> Completado
-            </Text>
-          ) : (
-            <Text style={styles.textProgress}>
-              <FontAwesome5 name={'check'} size={20} /> En Curso
-            </Text>
-          )}
-        </Card>
-      </TouchableOpacity>
+        </Box>
+        {item.state ? (
+          <Text style={styles.textActive}>
+            <FontAwesome5 name={'check-circle'} size={20} /> Completado
+          </Text>
+        ) : (
+          <Text style={styles.textProgress}>
+            <FontAwesome5 name={'check'} size={20} /> En Curso
+          </Text>
+        )}
+      </Pressable>
     );
   };
 
@@ -157,7 +162,7 @@ const AddConsultation = ({navigation}) => {
           </View>
         ) : (
           <FlatList
-            style={{marginTop: 40, padding: 10}}
+            style={{marginTop: 20, padding: 10}}
             data={items}
             renderItem={renderItem}
             keyExtractor={item => item._id}

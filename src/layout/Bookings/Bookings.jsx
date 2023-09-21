@@ -4,10 +4,9 @@ import {
   FlatList,
   Text,
   StyleSheet,
-  TouchableOpacity,
   ActivityIndicator,
 } from 'react-native';
-import {Fab, Icon, Box, Card, Button} from 'native-base';
+import {Fab, Icon, Box, Pressable, Button} from 'native-base';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome';
 import {useFocusEffect} from '@react-navigation/native';
 
@@ -116,44 +115,58 @@ const Bookings = ({navigation}) => {
 
   const renderItem = ({item}) => {
     return (
-      <TouchableOpacity
+      // <TouchableOpacity
+      //   onPress={() =>
+      //     navigation.navigate('BookingDetails', {
+      //       booking: item,
+      //     })
+      //   }>
+      <Pressable
         onPress={() =>
           navigation.navigate('BookingDetails', {
             booking: item,
           })
-        }>
-        <Card>
+        }
+        rounded="8"
+        overflow="hidden"
+        borderWidth="1"
+        borderColor="coolGray.300"
+        maxW="96"
+        shadow="3"
+        bg="coolGray.100"
+        p="5"
+        style={{marginBottom: 10}}>
+        {/* <Card> */}
+        <Box
+          style={{
+            flexDirection: 'row',
+            display: 'flex',
+          }}>
+          <FontAwesome5 name={'calendar'} color="#5067FF" size={20} />{' '}
           <Box
             style={{
               flexDirection: 'row',
               display: 'flex',
             }}>
-            <FontAwesome5 name={'calendar'} color="#5067FF" size={20} />{' '}
-            <Box
-              style={{
-                flexDirection: 'row',
-                display: 'flex',
-              }}>
-              <Text style={styles.textDate}>Fecha: </Text>
-              <Text>
-                {moment(item.date.slice(0, 10)).format('DD MMMM YYYY')}
-              </Text>
-            </Box>
+            <Text style={styles.textDate}>Fecha: </Text>
+            <Text>{moment(item.date.slice(0, 10)).format('DD MMMM YYYY')}</Text>
           </Box>
-          <Box style={{marginBottom: 10}}>
-            <Text>Horario de la consulta: {item.consultation.hourDate}</Text>
-          </Box>
-          {item.consultation.state ? (
-            <Text style={styles.textSuccess}>
-              <FontAwesome5 name={'check-circle'} size={20} /> Completado
-            </Text>
-          ) : (
-            <Text style={styles.textProgress}>
-              <FontAwesome5 name={'check'} size={20} /> En Curso
-            </Text>
-          )}
-        </Card>
-      </TouchableOpacity>
+        </Box>
+        <Box style={{marginBottom: 10}}>
+          <Text>Horario de la consulta: {item.consultation.hourDate}</Text>
+        </Box>
+        {item.consultation.state ? (
+          <Text style={styles.textSuccess}>
+            <FontAwesome5 name={'check-circle'} size={20} /> Completado
+          </Text>
+        ) : (
+          <Text style={styles.textProgress}>
+            <FontAwesome5 name={'check'} size={20} /> En Curso
+          </Text>
+        )}
+        {/* </Card> */}
+        {/* // </TouchableOpacity> */}
+      </Pressable>
     );
   };
 
@@ -186,7 +199,7 @@ const Bookings = ({navigation}) => {
           </View>
         ) : (
           <FlatList
-            style={{marginTop: 40, padding: 10}}
+            style={{marginTop: 20, padding: 10}}
             data={items}
             renderItem={renderItem}
             keyExtractor={item => item.consultation._id}

@@ -131,7 +131,21 @@ const AddBooking = ({navigation, route}) => {
   const renderItem = ({item}) => {
     return (
       <TouchableOpacity onPress={e => onSubmit(e, item)}>
-        <Card>
+        <Card
+          onPress={() =>
+            navigation.navigate('AddConsultation', {
+              booking: item,
+            })
+          }
+          rounded="8"
+          overflow="hidden"
+          borderWidth="1"
+          borderColor="coolGray.300"
+          maxW="96"
+          shadow="3"
+          bg="coolGray.100"
+          p="5"
+          style={{marginBottom: 10}}>
           <Box
             style={{
               flexDirection: 'row',

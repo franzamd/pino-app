@@ -1,6 +1,6 @@
 import React, {useContext, useEffect} from 'react';
 import {View, StyleSheet, Alert, BackHandler} from 'react-native';
-import {Card, Box, Text, Button} from 'native-base';
+import {Card, Box, Text, Button, Pressable} from 'native-base';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome';
 import BookingContext from '../../context/bookigs/bookingContext';
 import moment from 'moment';
@@ -98,7 +98,21 @@ const BookingDetails = ({navigation, route}) => {
 
       {/* Card Information about Booking info*/}
       <Box padding={5}>
-        <Card>
+        <Pressable
+          onPress={() =>
+            navigation.navigate('AddConsultation', {
+              booking: item,
+            })
+          }
+          rounded="8"
+          overflow="hidden"
+          borderWidth="1"
+          borderColor="coolGray.300"
+          maxW="96"
+          shadow="3"
+          bg="coolGray.100"
+          p="5"
+          style={{marginBottom: 10}}>
           <Box
             style={{
               flexDirection: 'row',
@@ -138,7 +152,7 @@ const BookingDetails = ({navigation, route}) => {
               <Text style={styles.textBtnSubmit}>Eliminar Reserva</Text>
             </Button>
           )}
-        </Card>
+        </Pressable>
       </Box>
     </View>
   );

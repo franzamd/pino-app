@@ -57,7 +57,7 @@ const Home = ({navigation}) => {
             </Text>
             <View style={styles.btnCreateProfile}>
               <Button onPress={() => navigation.navigate('Profile')}>
-                <Text>Crear Perfil</Text>
+                <Text style={{color: 'white'}}>Crear Perfil</Text>
               </Button>
             </View>
           </View>
