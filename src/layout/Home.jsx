@@ -1,14 +1,17 @@
 import React, {useEffect, useContext} from 'react';
-import {StyleSheet, Text} from 'react-native';
+import {StyleSheet, Text, Alert} from 'react-native';
 import {Box, View, Button} from 'native-base';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome';
 import ProfileContext from '../context/profile/profileContext';
+import AuthContext from '../context/auth/authContext';
 import Menu from './Menu';
 
 const Home = ({navigation}) => {
   const profileContext = useContext(ProfileContext);
+  const authContext = useContext(AuthContext);
 
   const {getProfileMe, profile, loading} = profileContext;
+  const {logout} = authContext;
 
   // Get profile actual user
   useEffect(() => {
@@ -32,8 +35,32 @@ const Home = ({navigation}) => {
             flexDirection: 'row',
           }}>
           <FontAwesome5
+            name={'sign-out'}
+            color="#52B0EA"
+            size={30}
+            style={{marginRight: 30}}
+            onPress={() => {
+              Alert.alert(
+                'Confirmar Acción',
+                '¿Estás seguro de cerrar sesión?',
+                [
+                  {
+                    text: 'Cancelar',
+                    style: 'cancel',
+                  },
+                  {
+                    text: 'OK',
+                    onPress: async () => {
+                      await logout();
+                    },
+                  },
+                ],
+              );
+            }}
+          />
+          <FontAwesome5
             name={'user'}
-            color="#fb5b5a"
+            color="#52B0EA"
             size={30}
             onPress={() => navigation.navigate('Profile')}
           />
@@ -90,7 +117,7 @@ const styles = StyleSheet.create({
   title: {
     fontWeight: 'bold',
     fontSize: 24,
-    color: '#fb5b5a',
+    color: '#52B0EA',
     textAlign: 'center',
   },
   titleMenu: {

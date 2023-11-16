@@ -75,7 +75,7 @@ const BookingDetails = ({navigation, route}) => {
           }}>
           <FontAwesome5
             name={'chevron-left'}
-            color="#fb5b5a"
+            color="#52B0EA"
             size={30}
             onPress={() => navigation.goBack()}
           />
@@ -172,7 +172,7 @@ const styles = StyleSheet.create({
   submitBtn: {
     alignSelf: 'center',
     width: '100%',
-    backgroundColor: '#fb5b5a',
+    backgroundColor: '#52B0EA',
     justifyContent: 'center',
   },
   textProgress: {
@@ -195,7 +195,7 @@ const styles = StyleSheet.create({
   titleMenu: {
     textAlign: 'left',
     fontSize: 20,
-    color: '#fb5b5a',
+    color: '#52B0EA',
     fontWeight: 'bold',
   },
 });

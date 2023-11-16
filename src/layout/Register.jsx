@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 25,
     textAlign: 'center',
-    color: '#fb5b5a',
+    color: '#52B0EA',
     marginBottom: 40,
   },
   sectionButtons: {
@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
   registerBtn: {
     width: '80%',
     borderRadius: 25,
-    backgroundColor: '#fb5b5a',
+    backgroundColor: '#52B0EA',
     height: 50,
     alignSelf: 'center',
     justifyContent: 'center',

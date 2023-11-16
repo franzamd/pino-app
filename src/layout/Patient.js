@@ -1,13 +1,13 @@
-import React, {useState, useContext, useEffect} from 'react';
-import {View, StyleSheet, Text} from 'react-native';
-import {Button, Container, Content, Form} from 'native-base';
+import React, { useState, useContext, useEffect } from 'react';
+import { View, StyleSheet, Text } from 'react-native';
+import { Button, Container, Content, Form } from 'native-base';
 import InputGroup from '../components/InputGroup';
 import SelectInputGroup from '../components/SelectInputGroup';
 import DateInputGroup from '../components/DateInputGroup';
 import PatientContext from '../context/patient/patientContext';
 import AuthContext from '../context/auth/authContext';
 
-const Patient = ({navigation}) => {
+const Patient = ({ navigation }) => {
   const patientContext = useContext(PatientContext);
   const authContext = useContext(AuthContext);
   const {
@@ -18,7 +18,7 @@ const Patient = ({navigation}) => {
     // updatePatient,
     patient: patientUser,
   } = patientContext;
-  const {user} = authContext;
+  const { user } = authContext;
   const [patient, setPatient] = useState({
     id: '',
     name: '',
@@ -86,7 +86,7 @@ const Patient = ({navigation}) => {
   const handleInputDate = (event, selectedDate) => {
     const currentDate = selectedDate || date;
     setShow(Platform.OS === 'ios');
-    setPatient({...patient, date: currentDate});
+    setPatient({ ...patient, date: currentDate });
   };
 
   const showMode = (currentMode) => {
@@ -127,37 +127,37 @@ const Patient = ({navigation}) => {
 
   // Options
   const optionsGender = [
-    {_id: '1', label: '* Seleccione una opción', value: 0},
-    {_id: '2', label: 'Masculino', value: 'Masculino'},
-    {_id: '3', label: 'Femenino', value: 'Femenino'},
+    { _id: '1', label: '* Seleccione una opción', value: 0 },
+    { _id: '2', label: 'Masculino', value: 'Masculino' },
+    { _id: '3', label: 'Femenino', value: 'Femenino' },
   ];
 
   const optionsDegreeInstruction = [
-    {_id: '1', label: '* Seleccione una opción', value: 0},
-    {_id: '2', label: 'Inicial', value: 'Inicial'},
-    {_id: '3', label: 'Primaria', value: 'Primaria'},
-    {_id: '4', label: 'Secundaria', value: 'Secundaria'},
-    {_id: '5', label: 'Universitaria', value: 'Universitaria'},
-    {_id: '6', label: 'Técnico', value: 'Tecnico'},
-    {_id: '7', label: 'Profesional', value: 'Profesional'},
+    { _id: '1', label: '* Seleccione una opción', value: 0 },
+    { _id: '2', label: 'Inicial', value: 'Inicial' },
+    { _id: '3', label: 'Primaria', value: 'Primaria' },
+    { _id: '4', label: 'Secundaria', value: 'Secundaria' },
+    { _id: '5', label: 'Universitaria', value: 'Universitaria' },
+    { _id: '6', label: 'Técnico', value: 'Tecnico' },
+    { _id: '7', label: 'Profesional', value: 'Profesional' },
   ];
 
   const optionsCivilStatus = [
-    {_id: '1', label: '* Seleccione una opción', value: 0},
-    {_id: '2', label: 'Soltero(a)', value: 'Soltero(a)'},
-    {_id: '3', label: 'Casado(a)', value: 'Casado(a)'},
-    {_id: '4', label: 'Divorciado(a)', value: 'Divorciado(a)'},
-    {_id: '5', label: 'Viudo(a)', value: 'Viudo(a)'},
-    {_id: '6', label: 'Union Libre', value: 'Union-libre'},
+    { _id: '1', label: '* Seleccione una opción', value: 0 },
+    { _id: '2', label: 'Soltero(a)', value: 'Soltero(a)' },
+    { _id: '3', label: 'Casado(a)', value: 'Casado(a)' },
+    { _id: '4', label: 'Divorciado(a)', value: 'Divorciado(a)' },
+    { _id: '5', label: 'Viudo(a)', value: 'Viudo(a)' },
+    { _id: '6', label: 'Union Libre', value: 'Union-libre' },
   ];
 
   const optionsLanguage = [
-    {_id: '1', label: '* Seleccione una opción', value: 0},
-    {_id: '2', label: 'Español', value: 'Español'},
-    {_id: '3', label: 'Ingles', value: 'Ingles'},
-    {_id: '4', label: 'Guaraní', value: 'Guarani'},
-    {_id: '5', label: 'Quechua', value: 'Quechua'},
-    {_id: '6', label: 'Aymara', value: 'Aymara'},
+    { _id: '1', label: '* Seleccione una opción', value: 0 },
+    { _id: '2', label: 'Español', value: 'Español' },
+    { _id: '3', label: 'Ingles', value: 'Ingles' },
+    { _id: '4', label: 'Guaraní', value: 'Guarani' },
+    { _id: '5', label: 'Quechua', value: 'Quechua' },
+    { _id: '6', label: 'Aymara', value: 'Aymara' },
   ];
 
   return (
@@ -278,7 +278,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 36,
     textAlign: 'center',
-    color: '#fb5b5a',
+    color: '#52B0EA',
     marginBottom: 20,
   },
   buttonsBox: {

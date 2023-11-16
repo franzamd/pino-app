@@ -1,8 +1,8 @@
-import React, {useContext, useEffect} from 'react';
-import {StyleSheet, View, Text} from 'react-native';
-import {DrawerContentScrollView, DrawerItem} from '@react-navigation/drawer';
+import React, { useContext, useEffect } from 'react';
+import { StyleSheet, View, Text } from 'react-native';
+import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
 import AuthContext from '../context/auth/authContext';
-import {Thumbnail} from 'native-base';
+import { Thumbnail } from 'native-base';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome';
 import ProfileContext from '../context/profile/profileContext';
 
@@ -11,8 +11,8 @@ import ProfileContext from '../context/profile/profileContext';
 const DrawerContent = (props) => {
   const authContext = useContext(AuthContext);
   const profileContext = useContext(ProfileContext);
-  const {profile, resetProfile} = profileContext;
-  const {user, logout} = authContext;
+  const { profile, resetProfile } = profileContext;
+  const { user, logout } = authContext;
 
   const name = profile && profile.data ? profile.data.name : '';
   const lastname = profile && profile.data ? profile.data.lastname : '';
@@ -26,14 +26,14 @@ const DrawerContent = (props) => {
   const imgSrc = require('../assets/nouser.png');
 
   return (
-    <View style={{flex: 1}}>
+    <View style={{ flex: 1 }}>
       <DrawerContentScrollView {...props}>
         <View style={styles.drawerContent}>
           {/* User info section*/}
           <View style={styles.userInfoSection}>
-            <View style={{flexDirection: 'row', marginTop: 15}}>
+            <View style={{ flexDirection: 'row', marginTop: 15 }}>
               <Thumbnail source={imgSrc} size={50} />
-              <View style={{marginLeft: 15}}>
+              <View style={{ marginLeft: 15 }}>
                 <Text style={styles.title}>{name}</Text>
                 <Text style={styles.caption}>{lastname}</Text>
                 <Text style={[styles.caption, styles.captionRole]}>{role}</Text>
@@ -43,15 +43,15 @@ const DrawerContent = (props) => {
           {/* List options section  */}
           <View style={styles.drawerSection}>
             <DrawerItem
-              icon={({color, size}) => (
-                <FontAwesome5 name={'home'} color="#fb5b5a" size={30} />
+              icon={({ color, size }) => (
+                <FontAwesome5 name={'home'} color="#52B0EA" size={30} />
               )}
               label="Home"
               onPress={() => props.navigation.navigate('Home')}
             />
             <DrawerItem
-              icon={({color, size}) => (
-                <FontAwesome5 name={'address-card'} color="#fb5b5a" size={30} />
+              icon={({ color, size }) => (
+                <FontAwesome5 name={'address-card'} color="#52B0EA" size={30} />
               )}
               label="Mi Perfil"
               onPress={() => props.navigation.navigate('Profile')}
@@ -59,8 +59,8 @@ const DrawerContent = (props) => {
 
             {profile && profile.data && (
               <DrawerItem
-                icon={({color, size}) => (
-                  <FontAwesome5 name={'laptop'} color="#fb5b5a" size={30} />
+                icon={({ color, size }) => (
+                  <FontAwesome5 name={'laptop'} color="#52B0EA" size={30} />
                 )}
                 label="Mis Reservas"
                 onPress={() => props.navigation.navigate('Bookings')}
@@ -72,8 +72,8 @@ const DrawerContent = (props) => {
       {/* Bottom info section */}
       <View style={styles.bottomDrawerSection}>
         <DrawerItem
-          icon={({color, size}) => (
-            <FontAwesome5 name={'sign-out'} color="#fb5b5a" size={30} />
+          icon={({ color, size }) => (
+            <FontAwesome5 name={'sign-out'} color="#52B0EA" size={30} />
           )}
           label="Cerrar Sesión"
           onPress={async () => {
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   captionRole: {
-    color: '#fb5b5a',
+    color: '#52B0EA',
   },
   row: {
     marginTop: 20,
