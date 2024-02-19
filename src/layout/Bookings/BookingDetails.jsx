@@ -6,7 +6,7 @@ import BookingContext from '../../context/bookigs/bookingContext';
 import moment from 'moment';
 import 'moment/locale/es';
 
-const BookingDetails = ({navigation, route}) => {
+const BookingDetails = ({navigation, route, item}) => {
   const bookingContext = useContext(BookingContext);
   const {loading, getBookings, deleteConsultation} = bookingContext;
 
